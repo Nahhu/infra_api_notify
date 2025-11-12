@@ -25,7 +25,7 @@ def check_key(x_api_key: Optional[str]):
 @app.post("/notify")
 def notify(evt: NotifyEvent,
           bg: BackgroundTasks,
-          x_api_key: Optional[str] = Header(None)):  # <-- opcional
+          x_api_key: Optional[str] = Header(None)): 
     check_key(x_api_key)
     bg.add_task(send_mail, evt.to, evt.subject, evt.text or "", evt.html or "")
     return {"status": "queued", "to": evt.to, "subject": evt.subject}
